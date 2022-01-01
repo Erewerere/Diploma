@@ -11,6 +11,7 @@ namespace Diploma.EF
     class DiplomaContext : DbContext
     {
         public DbSet<Patient> Patients { get; set; }
+        public DbSet<Decease> Deceases { get; set; }
 
         public DiplomaContext()
         {
@@ -23,10 +24,11 @@ namespace Diploma.EF
                 new MySqlServerVersion(new Version(8, 0, 11))
             );
         }
-
-        internal void Load()
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+           
+            
         }
+        
     }
 }

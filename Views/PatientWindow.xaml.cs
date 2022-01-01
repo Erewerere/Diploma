@@ -1,5 +1,6 @@
 ﻿using Diploma.EF;
 using Diploma.Models;
+using Diploma.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,40 +22,38 @@ namespace Diploma.Views
     /// </summary>
     public partial class PatientWindow : Window
     {
+        private PatientViewModel patientView;
         public PatientWindow()
         {
             InitializeComponent();
+            
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //using (DiplomaContext db = new DiplomaContext())
-            //{
-            //    //var players = db.Patients.ToList();
-            //    //foreach (Patient p in players)
-            //    //{
-            //    //    MessageBox.Show(p.FIO);
-            //    //}
-            //    //PatientGrid.ItemsSource = p.Patients;
-            //    db.Patients.Add(
-            //        new Patient() { FIO ="pABEL", BirhDate = new DateTime(2015, 12, 25) });
-
-            //    db.SaveChanges();
-
-            //}
-            using (DiplomaContext db = new DiplomaContext())
+            PatientViewModel patientView = new();
+            DiplomaContext db = new DiplomaContext();
+            foreach (var entity in db.ChangeTracker.Entries())
             {
-
-
-                foreach (Patient u in db.Patients)
-                {
-                    Label1.Content = u.FIO;
-                }
-                PatientGrid.ItemsSource = db.Patients.Local.ToObservableCollection();
-
+                entity.Reload();
             }
+        
+            db.Patients.Where(p => p.Name == "1");
+            db.Patients.Local.Add(new Patient {Name="Pavel", Surname="Radov", Middlename="SirGAYeVICH", BirthDate=new DateTime(2013,03,20), Location="Mariupol", Age = 1 ,Sex=Sex.Жіноча, DeceaseId=1, IntegrationId=1,DisabilityGroupId=1});
+            db.SaveChanges();
 
+            PatientGrid.ItemsSource = db.Patients.Local.ToList();
+            db.Patients.Local.Add(new Patient { Name = "Pavel2", Surname = "Radov", Middlename = "SirGAYeVICH", BirthDate = new DateTime(2013, 03, 20), Location = "Mariupol", Age = 1, Sex = Sex.Жіноча, DeceaseId = 1, IntegrationId = 1, DisabilityGroupId = 1 });
+            int b = db.Deceases.Local.Count();
+            db.SaveChanges();
+        }
 
-        }   
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (SearchName.Text.Length < 1)
+                PatientGrid.ItemsSource = null;               
+                PatientGrid.ItemsSource = DataWorker.GetPatients();
+            var filtered = DataWorker.GetPatients().Where(p => p.Name.StartsWith(SearchName.Text));
+            PatientGrid.ItemsSource = filtered;
+        }
     }
 }

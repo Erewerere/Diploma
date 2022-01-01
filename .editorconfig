@@ -2,3 +2,6 @@
 
 # IDE0130: Пространство имен (namespace) не соответствует структуре папок.
 dotnet_style_namespace_match_folder = true
+
+# IDE0055: Исправить форматирование
+dotnet_diagnostic.IDE0055.severity = none

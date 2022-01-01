@@ -13,12 +13,18 @@
     <Compile Update="Views\PatientWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Window1.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Main.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PatientWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Window1.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
