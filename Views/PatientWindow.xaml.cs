@@ -30,30 +30,34 @@ namespace Diploma.Views
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            PatientViewModel patientView = new();
-            DiplomaContext db = new DiplomaContext();
-            foreach (var entity in db.ChangeTracker.Entries())
-            {
-                entity.Reload();
-            }
-        
-            db.Patients.Where(p => p.Name == "1");
-            db.Patients.Local.Add(new Patient {Name="Pavel", Surname="Radov", Middlename="SirGAYeVICH", BirthDate=new DateTime(2013,03,20), Location="Mariupol", Age = 1 ,Sex=Sex.Жіноча, DeceaseId=1, IntegrationId=1,DisabilityGroupId=1});
-            db.SaveChanges();
+            PatientViewModel patientView = new(this);
 
-            PatientGrid.ItemsSource = db.Patients.Local.ToList();
-            db.Patients.Local.Add(new Patient { Name = "Pavel2", Surname = "Radov", Middlename = "SirGAYeVICH", BirthDate = new DateTime(2013, 03, 20), Location = "Mariupol", Age = 1, Sex = Sex.Жіноча, DeceaseId = 1, IntegrationId = 1, DisabilityGroupId = 1 });
-            int b = db.Deceases.Local.Count();
-            db.SaveChanges();
+            //DiplomaContext db = new DiplomaContext();         
+            //db.Patients.Where(p => p.Name == "1");
+            //db.Patients.Local.Add(new Patient {Name="Pavel", Surname="Radov", Middlename="SirGAYeVICH", BirthDate=new DateTime(2013,03,20), Location="Mariupol", Age = 1 ,Sex=Sex.Жіноча, DeceaseId=1, IntegrationId=1,DisabilityGroupId=1});
+            //db.SaveChanges();
+
+            //PatientGrid.ItemsSource = db.Patients.Local.ToList();
+            //db.Patients.Local.Add(new Patient { Name = "Pavel2", Surname = "Radov", Middlename = "SirGAYeVICH", BirthDate = new DateTime(2013, 03, 20), Location = "Mariupol", Age = 1, Sex = Sex.Жіноча, DeceaseId = 1, IntegrationId = 1, DisabilityGroupId = 1 });
+            //int b = db.Deceases.Local.Count();
+            //db.SaveChanges();
+        }
+
+        public void SetDataGridSource(IEnumerable<Patient> patients)
+        {
+            PatientGrid.ItemsSource = patients;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (SearchName.Text.Length < 1)
-                PatientGrid.ItemsSource = null;               
-                PatientGrid.ItemsSource = DataWorker.GetPatients();
+            {
+                var patientData = DataWorker.GetPatients();              
+                SetDataGridSource(patientData);
+            }
+
             var filtered = DataWorker.GetPatients().Where(p => p.Name.StartsWith(SearchName.Text));
-            PatientGrid.ItemsSource = filtered;
+            SetDataGridSource(filtered);
         }
     }
 }

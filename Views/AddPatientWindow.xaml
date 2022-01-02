@@ -11,7 +11,7 @@
         Title="PatientAdd" Height="540" Width="720"        
         >
     <Window.DataContext>
-        <vm:AddPatientViewModel/>
+        <vm:PatientViewModel/>
     </Window.DataContext>
     <Border Margin="-2,0,-2,-2" Background="White">
         <Grid>
@@ -76,7 +76,7 @@
                 <ComboBox  Margin="0,20,0,0" Background="Transparent" IsEditable="True" />
                 <TextBox Height="20"  TextWrapping="Wrap" Text="" Margin="0,20,0,0" BorderThickness="1" />
                 <TextBox Height="20"  TextWrapping="Wrap" Text="" Margin="0,20,0,0" BorderThickness="1" />
-                <ComboBox  Margin="0,18,0,0" Background="#D8DADF" IsReadOnly="True" Style="{DynamicResource ComboBoxStyle1}" IsEditable="True"  />
+                <ComboBox SelectedItem="{Binding Sex, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Source={enum:EnumBinding { x:Type models:Sex } } }"  Margin="0,18,0,0" Background="#D8DADF" IsReadOnly="True" Style="{DynamicResource ComboBoxStyle1}" IsEditable="True"  />
                 <ComboBox  Margin="0,18,0,0" Background="Transparent" IsEditable="True" />
                 <ComboBox  Margin="0,16,0,0" Background="Transparent" IsEditable="True"  />
 

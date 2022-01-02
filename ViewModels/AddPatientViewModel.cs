@@ -14,7 +14,7 @@ namespace Diploma.ViewModels
     {
 
         #region Patient Property
-        public static Patient patient = new() { Name = "a", Surname="b", Middlename="c"};       
+        public Patient patient = new() { Name = "a", Surname="b", Middlename="c", Sex = Sex.Чоловіча};       
         public int Id {
             get { return patient.Id; }
             set {
@@ -147,7 +147,7 @@ namespace Diploma.ViewModels
                     {
                        if(DataWorker.CreatePatient(patient))
                         {
-                            MessageBox.Show("Додано");
+                            MessageBox.Show("Додано");                        
                             return;
                         }
                         MessageBox.Show("Такий користувач вже є");

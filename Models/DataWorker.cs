@@ -16,9 +16,12 @@ namespace Diploma.Models
         {
             DiplomaContext db = new();
             if (db.Patients.Any(p => p.Id == patient.Id))            
-                return false;
-            var b = db.Patients.Local;
-            db.Patients.Local.Add(patient);
+                return false;         
+            patient.BirthDate = DateTime.Now;
+            patient.DeceaseId = 1;
+            patient.IntegrationId = 1;
+            patient.DisabilityGroupId = 1;            
+            db.Patients.Add(patient);
             db.SaveChanges();
             return true;
         }

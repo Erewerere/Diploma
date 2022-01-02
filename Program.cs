@@ -12,11 +12,15 @@ namespace Diploma
     /// </summary>
     public static class Program
     {
-        public static void OpenAndCenterWindow(Window window)
+        public static bool OpenAndCenterWindow(Window window)
         {
             window.Owner = App.Current.MainWindow;
             window.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
-            window.ShowDialog();
+            if(window.ShowDialog() == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
