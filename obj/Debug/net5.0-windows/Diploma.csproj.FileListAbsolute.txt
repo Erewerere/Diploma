@@ -69,3 +69,5 @@ C:\GitHub\Diploma2\Diploma\obj\Debug\net5.0-windows\Views\CreateReportWindow.g.c
 C:\GitHub\Diploma2\Diploma\obj\Debug\net5.0-windows\Views\AddPatientWindow.baml
 C:\GitHub\Diploma2\Diploma\obj\Debug\net5.0-windows\Views\AppointServiceWindow.baml
 C:\GitHub\Diploma2\Diploma\obj\Debug\net5.0-windows\Views\CreateReportWindow.baml
+C:\GitHub\Diploma2\Diploma\obj\Debug\net5.0-windows\Views\ServiceWindow.g.cs
+C:\GitHub\Diploma2\Diploma\obj\Debug\net5.0-windows\Views\ServiceWindow.baml

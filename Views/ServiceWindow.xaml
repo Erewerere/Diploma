@@ -1,0 +1,33 @@
+﻿<Window x:Class="Diploma.Views.ServiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Diploma.Views"
+        mc:Ignorable="d"
+        xmlns:models="clr-namespace:Diploma.Models"
+        xmlns:enum ="clr-namespace:EnumBindings"
+        xmlns:vm="clr-namespace:Diploma.ViewModels"
+        Title="ServiceWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.DataContext>
+        <vm:ServiceViewModel></vm:ServiceViewModel>
+    </Window.DataContext>
+    <Grid RenderTransformOrigin="0.491,0.475">
+        <DataGrid 
+                AutoGenerateColumns="False"  CanUserAddRows="False" 
+                Background="White" 
+                Margin="158,28,106,33" x:Name="Grid" BorderThickness="3"   SelectedItem="{Binding SelectedService}"
+                >
+            <DataGrid.Columns >
+                <DataGridTextColumn x:Name="NameColumn" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" FontSize ="32" Width="1.2*" Header="Прізвище"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=ReabilitationType.Name, Mode=OneWay}"  FontSize ="32" Width="1.2*" Header="Ім'я"></DataGridTextColumn>
+
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox Text="{Binding Name}" x:Name="Label1"  HorizontalAlignment="Left" Margin="10,188,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="30,249,0,0" VerticalAlignment="Top" Command="{Binding Click}"/>
+
+    </Grid>
+</Window>

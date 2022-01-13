@@ -158,7 +158,9 @@ namespace Diploma.ViewModels
         public PatientViewModel(PatientWindow window)
         {
             _patientWindow = window;
+
             IEnumerable<Patient> data = DataWorker.GetPatients();
+            data.First().Sex= (Sex)1;
             window.SetDataGridSource(data);
         }
 

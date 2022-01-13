@@ -23,7 +23,8 @@ namespace Diploma.Models
         public string Middlename{ get; set; }
         public int Age { get; set; }
         public DateTime BirthDate { get; set; }
-        public string Location { get; set; } = "";    
+        public string Location { get; set; } = "";
+        
         public Sex Sex { get; set; }
         public SocialIntegration Integration { get; set; }
         [Column("Integration")]
@@ -38,5 +39,5 @@ namespace Diploma.Models
             throw new NotImplementedException();
         }
     }
-    public enum Sex { Чоловіча, Жіноча }
+    public enum Sex { Чоловіча =0 , Жіноча =1 }
 }

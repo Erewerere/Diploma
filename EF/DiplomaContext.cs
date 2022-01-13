@@ -12,6 +12,8 @@ namespace Diploma.EF
     {
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Decease> Deceases { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<ReabilitationType> ReabilitationTypes { get; set; }
 
         public DiplomaContext()
         {
@@ -26,9 +28,9 @@ namespace Diploma.EF
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
-            
+            modelBuilder.Entity<Service>().HasOne(s => s.ReabilitationType).WithMany(p => p.Service).HasForeignKey(s => s.ReabilitationTypeId);
+
         }
-        
+
     }
 }

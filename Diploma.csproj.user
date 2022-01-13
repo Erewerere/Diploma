@@ -24,6 +24,9 @@
     <Page Update="Views\PatientWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\ServiceWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Window1.xaml">
       <SubType>Designer</SubType>
     </Page>

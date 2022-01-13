@@ -8,5 +8,8 @@ namespace Diploma.Models
 {
     public class ReabilitationType
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public List<Service> Service { get; set; }
     }
 }
