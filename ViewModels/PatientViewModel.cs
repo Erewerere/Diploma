@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Diploma;
 using Diploma.EF;
 using Diploma.Models;
@@ -16,12 +17,14 @@ namespace Diploma.ViewModels
 {
      class PatientViewModel : INotifyPropertyChanged
      {
-        private Window _patientWindow;
+        private static PatientWindow _patientWindow;
+        private static AddPatientWindow _addpatientWindow;
+        private static EditPatientWindow _editpatientWindow;
         public event PropertyChangedEventHandler PropertyChanged ;
-       
+        List<TextBox> changedBoxes = new();
 
         #region Patient Property
-        public Patient patient = new() { Name = "a", Surname = "b", Middlename = "c", Sex = Sex.Чоловіча };
+        public  Patient patient = new Patient() { Id=0};
         public int Id
         {
             get { return patient.Id; }
@@ -160,26 +163,106 @@ namespace Diploma.ViewModels
             _patientWindow = window;
 
             IEnumerable<Patient> data = DataWorker.GetPatients();
-            data.First().Sex= (Sex)1;
+           
             window.SetDataGridSource(data);
         }
+        public PatientViewModel(AddPatientWindow window)
+        {
+            _addpatientWindow = window;
+            
+            
+            
+        }
+        public PatientViewModel(EditPatientWindow window)
+        {
+            _editpatientWindow = window;
+            _editpatientWindow.DialogResult = false;
+            
+        }
 
-        
+
 
 
         private RelayCommand addPatient;
         public RelayCommand AddPatient => addPatient ?? new RelayCommand(
                     obj =>
                     {
+                        RefreshWindow(_addpatientWindow);
+                        if (patient.Name == null || patient.Name.Trim().Length < 2 )
+                        {
+                            SetBlock(_addpatientWindow,"Name");
+                            return;
+                        }
+                        if (patient.Surname == null || patient.Surname.Trim().Length < 2  )
+                        {
+                            SetBlock(_addpatientWindow,"Surname");
+                            return;
+                        }
+
+                        if (patient.Middlename == null || patient.Middlename.Trim().Length < 4  )
+                        {
+                            SetBlock(_addpatientWindow,"Middlename");
+                            return;
+                        }
+
                         if (DataWorker.CreatePatient(patient))
                         {
                             MessageBox.Show("Додано");
+                            _addpatientWindow.DialogResult = true;
+                            RefreshVM();
+                            
                             return;
                         }
                         MessageBox.Show("Такий користувач вже є");
                     }
                     );
 
+        private void RefreshWindow(Window window)
+        {
+            foreach( var textbox in changedBoxes)
+            {
+                textbox.BorderBrush = Brushes.Black;
+            }
+        }
+
+        private void RefreshVM()
+        {
+            patient = new Patient() { Id = 0 };
+        }
+
+        List<TextBox> AllTextBoxes(DependencyObject parent)
+        {
+            var list = new List<TextBox>();
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is TextBox)
+                    list.Add(child as TextBox);
+                list.AddRange(AllTextBoxes(child));
+            }
+            return list;
+        }
+
+        public Control GetElement(Window window,string name)
+        {
+            if (window.FindName(name) is not Control element)
+            {
+                MessageBox.Show("Element " + name + " is not found");
+                return null;
+            }
+
+            return element;
+
+        }
+        public void SetBlock(Window window,string name)
+        {
+            TextBox element = (TextBox)GetElement(window,name);
+            if (element == null)
+                return;
+            element.BorderBrush = Brushes.Red;
+            changedBoxes.Add(element);
+
+        } 
 
         #region For Interaction With Windows
 
@@ -188,7 +271,9 @@ namespace Diploma.ViewModels
                     obj =>
                     {
                         AddPatientWindow window = new AddPatientWindow();
-                        Program.OpenAndCenterWindow(window);
+                        bool d =Program.OpenAndCenterWindow(window);
+                        if(d == true)
+                            _patientWindow.SetDataGridSource(DataWorker.GetPatients());
                        
                        
                     }

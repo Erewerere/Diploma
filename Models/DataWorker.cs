@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Class designed for working with EntityFramework and DataBase 
+
 namespace Diploma.Models
 {
     public static class DataWorker
@@ -16,14 +18,18 @@ namespace Diploma.Models
         public static bool CreatePatient(Patient patient )
         {
             DiplomaContext db = new();
-            if (db.Patients.Any(p => p.Id == patient.Id))            
-                return false;         
-            patient.BirthDate = DateTime.Now;
+            patient.Id = 0;
+            if( db.Patients.Any(p => p.Name == patient.Name) && db.Patients.Any(p => p.Surname == patient.Surname) && db.Patients.Any(p => p.Middlename == patient.Middlename)
+                && db.Patients.Any(p => p.BirthDate == patient.BirthDate))            
+               return false;        
+            
             patient.DeceaseId = 1;
             patient.IntegrationId = 1;
-            patient.DisabilityGroupId = 1;            
+            patient.DisabilityGroupId = 1;   
+            
             db.Patients.Add(patient);
             db.SaveChanges();
+           
             return true;
         }
 

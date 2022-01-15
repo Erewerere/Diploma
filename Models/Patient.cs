@@ -21,11 +21,12 @@ namespace Diploma.Models
         public string Name{ get; set; }
         public string Surname { get; set; }
         public string Middlename{ get; set; }
+        public string FIO => Surname + " " + Name + " " + Middlename;
         public int Age { get; set; }
         public DateTime BirthDate { get; set; }
-        public string Location { get; set; } = "";
-        
-        public Sex Sex { get; set; }
+        public string Location { get; set; } = "";      
+        [Column("Sex")]
+        public Sex Sex { get ; set ; }
         public SocialIntegration Integration { get; set; }
         [Column("Integration")]
         public int IntegrationId { get; set; }        
@@ -39,5 +40,5 @@ namespace Diploma.Models
             throw new NotImplementedException();
         }
     }
-    public enum Sex { Чоловіча =0 , Жіноча =1 }
+    public enum Sex { Чоловіча =1 , Жіноча =0 }
 }

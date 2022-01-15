@@ -30,6 +30,12 @@ namespace Diploma.EF
         {
             modelBuilder.Entity<Service>().HasOne(s => s.ReabilitationType).WithMany(p => p.Service).HasForeignKey(s => s.ReabilitationTypeId);
 
+            //Used to get Enum from database and convert them to EF model
+            modelBuilder.Entity<Patient>().Property(p => p.Sex).HasConversion(
+                v => v.ToString(),
+            v => (Sex)Enum.Parse(typeof(Sex), v));
+
+            modelBuilder.Entity<Patient>().Ignore(p => p.FIO);      
         }
 
     }

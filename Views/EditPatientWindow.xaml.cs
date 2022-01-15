@@ -1,5 +1,4 @@
-﻿using Diploma.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,15 +15,13 @@ using System.Windows.Shapes;
 namespace Diploma.Views
 {
     /// <summary>
-    /// Логика взаимодействия для PatientAdd.xaml
+    /// Логика взаимодействия для EditPatientWindow.xaml
     /// </summary>
-    public partial class AddPatientWindow : Window
+    public partial class EditPatientWindow : Window
     {
-        public AddPatientWindow()
+        public EditPatientWindow()
         {
-            DataContext = new PatientViewModel(this);
             InitializeComponent();
-        }        
+        }
     }
-   
 }

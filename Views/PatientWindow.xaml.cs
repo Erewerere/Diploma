@@ -30,23 +30,15 @@ namespace Diploma.Views
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            PatientViewModel patientView = new(this);
-
-            //DiplomaContext db = new DiplomaContext();         
-            //db.Patients.Where(p => p.Name == "1");
-            //db.Patients.Local.Add(new Patient {Name="Pavel", Surname="Radov", Middlename="SirGAYeVICH", BirthDate=new DateTime(2013,03,20), Location="Mariupol", Age = 1 ,Sex=Sex.Жіноча, DeceaseId=1, IntegrationId=1,DisabilityGroupId=1});
-            //db.SaveChanges();
-
-            //PatientGrid.ItemsSource = db.Patients.Local.ToList();
-            //db.Patients.Local.Add(new Patient { Name = "Pavel2", Surname = "Radov", Middlename = "SirGAYeVICH", BirthDate = new DateTime(2013, 03, 20), Location = "Mariupol", Age = 1, Sex = Sex.Жіноча, DeceaseId = 1, IntegrationId = 1, DisabilityGroupId = 1 });
-            //int b = db.Deceases.Local.Count();
-            //db.SaveChanges();
+            PatientViewModel patientView = new(this);            
         }
+
 
         public void SetDataGridSource(IEnumerable<Patient> patients)
         {
             PatientGrid.ItemsSource = patients;
         }
+
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -59,5 +51,8 @@ namespace Diploma.Views
             var filtered = DataWorker.GetPatients().Where(p => p.Name.StartsWith(SearchName.Text));
             SetDataGridSource(filtered);
         }
+
+
+       
     }
 }

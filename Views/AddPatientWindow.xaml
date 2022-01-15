@@ -57,11 +57,11 @@
                 <Label  Content="Ім'я:" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
                 <Label  Content="По-батькові:" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
                 <Label Content="Група інвалідності:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="30"/>
-                <Label Content="Місце проживання:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
-                <Label Content="Дата народження:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
-                <Label Content="Стать:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
-                <Label Content="Тип інтегрованості:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
-                <Label Content="Захворювання:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
+                <Label  Content="Місце проживання:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
+                <Label  Content="Дата народження:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
+                <Label  Content="Стать:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
+                <Label  Content="Тип інтегрованості:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
+                <Label   Content="Захворювання:" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.211,2.885" FontSize="16" Height="29"/>
 
             </StackPanel>
             <StackPanel Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3" Margin="16,73,67,0" Grid.RowSpan="2">
@@ -70,15 +70,15 @@
                         <Setter Property="Margin" Value="0,18,0,0"/>
                     </Style>
                 </StackPanel.Resources>
-                <TextBox Height="20"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,16,0,0" Text="{Binding Path=Surname}"/>
-                <TextBox Height="21"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,19,0,0" Text="{Binding Path=Name}"/>
-                <TextBox Height="20"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,19,0,0" Text="{Binding Path=Middlename}"/>
-                <ComboBox  Margin="0,20,0,0" Background="Transparent" IsEditable="True" />
-                <TextBox Height="20"  TextWrapping="Wrap" Text="" Margin="0,20,0,0" BorderThickness="1" />
-                <TextBox Height="20"  TextWrapping="Wrap" Text="" Margin="0,20,0,0" BorderThickness="1" />
-                <ComboBox SelectedItem="{Binding Sex, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Source={enum:EnumBinding { x:Type models:Sex } } }"  Margin="0,18,0,0" Background="#D8DADF" IsReadOnly="True" Style="{DynamicResource ComboBoxStyle1}" IsEditable="True"  />
-                <ComboBox  Margin="0,18,0,0" Background="Transparent" IsEditable="True" />
-                <ComboBox  Margin="0,16,0,0" Background="Transparent" IsEditable="True"  />
+                <TextBox Name="Surname" Height="20"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,16,0,0" Text="{Binding Path=Surname}"/>
+                <TextBox Name="Name" Height="21"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,19,0,0" Text="{Binding Path=Name}"/>
+                <TextBox Name="Middlename"  Height="20"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,19,0,0" Text="{Binding Path=Middlename}"/>
+                <ComboBox Name="DisabilityGroup"  Margin="0,20,0,0" Background="Transparent" IsEditable="True" />
+                <TextBox Name="Location" Height="20"  TextWrapping="Wrap" Text="" Margin="0,20,0,0" BorderThickness="1" />
+                <TextBox Name="Birthdate" Height="20"  TextWrapping="Wrap" Text="" Margin="0,20,0,0" BorderThickness="1" />
+                <ComboBox Name="Sex" SelectedItem="{Binding Sex, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Source={enum:EnumBinding { x:Type models:Sex } } }"  Margin="0,18,0,0" Background="#D8DADF" IsReadOnly="True" Style="{DynamicResource ComboBoxStyle1}" IsEditable="True"  />
+                <ComboBox Name="Integration" Margin="0,18,0,0" Background="Transparent" IsEditable="True" />
+                <ComboBox  Name ="Decease" Margin="0,16,0,0" Background="Transparent" IsEditable="True"  />
 
 
             </StackPanel>
