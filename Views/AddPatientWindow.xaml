@@ -70,11 +70,11 @@
                         <Setter Property="Margin" Value="0,18,0,0"/>
                     </Style>
                 </StackPanel.Resources>
-                <TextBox Name="Surname" Height="20"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,16,0,0" Text="{Binding Path=Surname}"/>
-                <TextBox Name="Name" Height="21"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,19,0,0" Text="{Binding Path=Name}"/>
-                <TextBox Name="Middlename"  Height="20"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,19,0,0" Text="{Binding Path=Middlename}"/>
+                <TextBox PreviewTextInput="CharactersOnly_TextInput" Name="Surname" Height="20"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,16,0,0" Text="{Binding Path=Surname}"/>
+                <TextBox PreviewTextInput="CharactersOnly_TextInput" Name="Name" Height="21"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,19,0,0" Text="{Binding Path=Name}"/>
+                <TextBox PreviewTextInput="CharactersOnly_TextInput" Name="Middlename"  Height="20"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,19,0,0" Text="{Binding Path=Middlename}"/>
                 <ComboBox Name="DisabilityGroup"  Margin="0,20,0,0" Background="Transparent" IsEditable="True" />
-                <TextBox Name="Location" Height="20"  TextWrapping="Wrap" Text="" Margin="0,20,0,0" BorderThickness="1" />
+                <TextBox Name="Location" PreviewTextInput="CharactersOnly_TextInput" Height="20"  TextWrapping="Wrap" Text="" Margin="0,20,0,0" BorderThickness="1" />
                 <TextBox Name="Birthdate" Height="20"  TextWrapping="Wrap" Text="" Margin="0,20,0,0" BorderThickness="1" />
                 <ComboBox Name="Sex" SelectedItem="{Binding Sex, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Source={enum:EnumBinding { x:Type models:Sex } } }"  Margin="0,18,0,0" Background="#D8DADF" IsReadOnly="True" Style="{DynamicResource ComboBoxStyle1}" IsEditable="True"  />
                 <ComboBox Name="Integration" Margin="0,18,0,0" Background="Transparent" IsEditable="True" />

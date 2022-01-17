@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Diploma;
 using Diploma.EF;
@@ -22,9 +23,13 @@ namespace Diploma.ViewModels
         private static EditPatientWindow _editpatientWindow;
         public event PropertyChangedEventHandler PropertyChanged ;
         List<TextBox> changedBoxes = new();
+        private static Patient selectedPatient;
+        public Patient SelectedPatient { get => selectedPatient; set => selectedPatient = value; }
+        
 
         #region Patient Property
-        public  Patient patient = new Patient() { Id=0};
+        private  Patient patient = new Patient() { Id=0};
+        public Patient Patient { get => patient; set  { patient = value; OnPropertyChanged(); } }
         public int Id
         {
             get { return patient.Id; }
@@ -152,11 +157,16 @@ namespace Diploma.ViewModels
             }
         }
 
+
         #endregion
 
+        public List<Decease> AllDeceases { get; set; } = DataWorker.GetDeceases();
+        public List<SocialIntegration> AllIntergrations { get; set; } = DataWorker.GetSocialIntergration();
+        public List<DisabilityGroup> AllDisabilityGroups { get; set; } = DataWorker.GetDisabilityGroups();
 
         public PatientViewModel()
-        {            
+        {
+            
         }
         public PatientViewModel(PatientWindow window)
         {
@@ -173,10 +183,23 @@ namespace Diploma.ViewModels
             
             
         }
-        public PatientViewModel(EditPatientWindow window)
+        public PatientViewModel(EditPatientWindow window, Patient p)
         {
             _editpatientWindow = window;
-            _editpatientWindow.DialogResult = false;
+            
+            patient = new Patient()
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Surname = p.Surname,
+                Middlename = p.Middlename,
+                Location = p.Location,
+                BirthDate = p.BirthDate,
+                IntegrationId = p.IntegrationId,
+                DeceaseId = p.DeceaseId,
+                Sex = p.Sex
+            };
+
             
         }
 
@@ -187,39 +210,58 @@ namespace Diploma.ViewModels
         public RelayCommand AddPatient => addPatient ?? new RelayCommand(
                     obj =>
                     {
-                        RefreshWindow(_addpatientWindow);
-                        if (patient.Name == null || patient.Name.Trim().Length < 2 )
-                        {
-                            SetBlock(_addpatientWindow,"Name");
-                            return;
-                        }
-                        if (patient.Surname == null || patient.Surname.Trim().Length < 2  )
-                        {
-                            SetBlock(_addpatientWindow,"Surname");
-                            return;
-                        }
+                        Patient = new Patient() { Name = "CHANGED" };
+                        //RefreshWindow(_addpatientWindow);
+                        //if (patient.Name == null || patient.Name.Trim().Length < 2 )
+                        //{
+                        //    MessageBox.Show("Довжина поля Ім'я повинна буди не меншою ніж 2 букви");
+                        //    SetBlock(_addpatientWindow,"Name");
+                        //    return;
+                        //}
+                        //if (patient.Surname == null || patient.Surname.Trim().Length < 2  )
+                        //{
 
-                        if (patient.Middlename == null || patient.Middlename.Trim().Length < 4  )
-                        {
-                            SetBlock(_addpatientWindow,"Middlename");
-                            return;
-                        }
+                        //    SetBlock(_addpatientWindow,"Surname");
+                        //    return;
+                        //}
 
-                        if (DataWorker.CreatePatient(patient))
-                        {
-                            MessageBox.Show("Додано");
-                            _addpatientWindow.DialogResult = true;
-                            RefreshVM();
+                        //if (patient.Middlename == null || patient.Middlename.Trim().Length < 4  )
+                        //{
+                        //    SetBlock(_addpatientWindow,"Middlename");
+                        //    return;
+                        //}
+
+                        //if (DataWorker.CreatePatient(patient))
+                        //{
+                        //    MessageBox.Show("Додано");
+                        //    _addpatientWindow.DialogResult = true;
+                        //    RefreshVM();
                             
-                            return;
-                        }
-                        MessageBox.Show("Такий користувач вже є");
+                        //    return;
+                        //}
+                        //MessageBox.Show("Такий користувач вже є");
                     }
                     );
 
+        public RelayCommand editPatient;
+        public RelayCommand EditPatient => editPatient ?? new RelayCommand(
+            obj=>
+            {
+                var d = DataWorker.UpdatePatient(patient);
+                if(d == false)
+                {
+                    MessageBox.Show("There is no update");
+                }
+            }
+        );
+
+
+
+        #region Methods
+
         private void RefreshWindow(Window window)
         {
-            foreach( var textbox in changedBoxes)
+            foreach (var textbox in changedBoxes)
             {
                 textbox.BorderBrush = Brushes.Black;
             }
@@ -262,9 +304,11 @@ namespace Diploma.ViewModels
             element.BorderBrush = Brushes.Red;
             changedBoxes.Add(element);
 
-        } 
+        }
 
-        #region For Interaction With Windows
+        #endregion
+
+        #region Commands for Interaction With Windows
 
         private RelayCommand openAddPatientWindow;
         public RelayCommand OpenAddPatientWindow => openAddPatientWindow ?? new RelayCommand(
@@ -279,7 +323,42 @@ namespace Diploma.ViewModels
                     }
                     );
 
+        private RelayCommand openEditPatientWindow;
+        public RelayCommand OpenEditPatientWindow => openEditPatientWindow ?? new RelayCommand(
+                    obj =>
+                    {
 
+                        if (selectedPatient == null)
+                        {
+                            MessageBox.Show("Оберіть пацієнта перед тим, як обновляти");
+                            return;
+                        }
+                        
+                        EditPatientWindow window = new EditPatientWindow(selectedPatient);
+                        bool d = Program.OpenAndCenterWindow(window);
+                        if (d == true)
+                            _patientWindow.SetDataGridSource(DataWorker.GetPatients());
+
+                    }
+                    );
+
+
+        private RelayCommand closeAddPatientWindow;
+        public RelayCommand CloseAddPatientWindow => closeAddPatientWindow ?? new RelayCommand(
+                    obj =>
+                    {
+                        _addpatientWindow.Close();
+                    }
+                    );
+
+
+        private RelayCommand closeEditPatientWindow;
+        public RelayCommand CloseEditPatientWindow => closeEditPatientWindow ?? new RelayCommand(
+                    obj =>
+                    {
+                        _editpatientWindow.Close();
+                    }
+                    );
 
         #endregion
 

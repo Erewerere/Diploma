@@ -14,6 +14,12 @@ namespace Diploma.EF
         public DbSet<Decease> Deceases { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<ReabilitationType> ReabilitationTypes { get; set; }
+        public DbSet<SocialIntegration> SocialIntegrations { get; set; }
+        public DbSet<DisabilityGroup> DisabilityGroups { get; set; }
+        public DbSet<ProvidedService> ProvidedServices { get; set; }
+        public DbSet<ReabilitationCourse> ReabilitationCourses { get; set; }
+        public DbSet<User> Users { get; set; }
+       
 
         public DiplomaContext()
         {

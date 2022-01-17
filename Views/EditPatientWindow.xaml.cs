@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Diploma.Models;
+using Diploma.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +25,17 @@ namespace Diploma.Views
         public EditPatientWindow()
         {
             InitializeComponent();
+            PatientViewModel patientViewModel = new();
+        }
+        public EditPatientWindow(Patient a)
+        {
+            InitializeComponent();
+            PatientViewModel patientViewModel = new(this,a);
+        }
+        private void CharactersOnly_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            bool isCyrillic = Regex.IsMatch(e.Text, @"\p{IsCyrillic}");
+            e.Handled = !isCyrillic;
         }
     }
 }

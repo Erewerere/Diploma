@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,7 +25,13 @@ namespace Diploma.Views
         {
             DataContext = new PatientViewModel(this);
             InitializeComponent();
-        }        
+        }
+
+        private void CharactersOnly_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            bool isCyrillic = Regex.IsMatch(e.Text, @"\p{IsCyrillic}");
+            e.Handled = !isCyrillic;
+        }
     }
    
 }
