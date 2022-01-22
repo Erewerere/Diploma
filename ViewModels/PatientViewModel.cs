@@ -28,7 +28,7 @@ namespace Diploma.ViewModels
         
 
         #region Patient Property
-        private  Patient patient = new Patient() { Id=0};
+        private static Patient patient = new Patient() { Id=0};
         public Patient Patient { get => patient; set  { patient = value; OnPropertyChanged(); } }
         public int Id
         {
@@ -53,7 +53,7 @@ namespace Diploma.ViewModels
             get { return patient.DisabilityGroupId; }
             set
             {
-                patient.DisabilityGroupId = value;
+                patient.DisabilityGroupId = (int)value;
                 OnPropertyChanged("DisabilityGroupId");
             }
         }
@@ -160,9 +160,9 @@ namespace Diploma.ViewModels
 
         #endregion
 
-        public List<Decease> AllDeceases { get; set; } = DataWorker.GetDeceases();
-        public List<SocialIntegration> AllIntergrations { get; set; } = DataWorker.GetSocialIntergration();
-        public List<DisabilityGroup> AllDisabilityGroups { get; set; } = DataWorker.GetDisabilityGroups();
+        public static  List<Decease> AllDeceases { get; set; } = DataWorker.GetDeceases();
+        public static  List<SocialIntegration> AllIntergrations { get; set; } = DataWorker.GetSocialIntergration();
+        public static  List<DisabilityGroup> AllDisabilityGroups { get; set; } = DataWorker.GetDisabilityGroups();
 
         public PatientViewModel()
         {
@@ -183,24 +183,22 @@ namespace Diploma.ViewModels
             
             
         }
-        public PatientViewModel(EditPatientWindow window, Patient p)
+        public PatientViewModel(EditPatientWindow window)
         {
             _editpatientWindow = window;
-            
-            patient = new Patient()
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Surname = p.Surname,
-                Middlename = p.Middlename,
-                Location = p.Location,
-                BirthDate = p.BirthDate,
-                IntegrationId = p.IntegrationId,
-                DeceaseId = p.DeceaseId,
-                Sex = p.Sex
-            };
-
-            
+            AllDeceases = DataWorker.GetDeceases();
+            AllIntergrations = DataWorker.GetSocialIntergration();
+            AllDisabilityGroups  = DataWorker.GetDisabilityGroups();
+            //Id = SelectedPatient.Id;
+            //Name = SelectedPatient.Name;
+            //Surname = SelectedPatient.Surname;
+            //Middlename = SelectedPatient.Middlename;
+            //Location = SelectedPatient.Location;
+            //BirthDate = SelectedPatient.BirthDate;
+            //IntegrationId = SelectedPatient.IntegrationId;
+            //DeceaseId = SelectedPatient.DeceaseId;
+            //Sex = SelectedPatient.Sex;         
+                        
         }
 
 
@@ -328,13 +326,14 @@ namespace Diploma.ViewModels
                     obj =>
                     {
 
-                        if (selectedPatient == null)
+                        if (Patient == null)
                         {
                             MessageBox.Show("Оберіть пацієнта перед тим, як обновляти");
                             return;
                         }
                         
-                        EditPatientWindow window = new EditPatientWindow(selectedPatient);
+                        EditPatientWindow window = new EditPatientWindow();
+                        
                         bool d = Program.OpenAndCenterWindow(window);
                         if (d == true)
                             _patientWindow.SetDataGridSource(DataWorker.GetPatients());
@@ -365,7 +364,12 @@ namespace Diploma.ViewModels
         #region For ICommand Implementation
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+            {
+                var e = new PropertyChangedEventArgs(propertyName);
+                handler(this, e);
+            }
         }
         #endregion
     }

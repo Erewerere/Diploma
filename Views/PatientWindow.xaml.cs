@@ -48,7 +48,7 @@ namespace Diploma.Views
                 SetDataGridSource(patientData);
             }
 
-            var filtered = DataWorker.GetPatients().Where(p => p.Name.StartsWith(SearchName.Text));
+            var filtered = DataWorker.GetPatients().Where(p => p.FIO.ToLower().StartsWith(SearchName.Text.ToLower()));
             SetDataGridSource(filtered);
         }
 

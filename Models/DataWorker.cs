@@ -53,7 +53,7 @@ namespace Diploma.Models
                 Patient old = db.Patients.Where(p => p.Id == patient.Id).FirstOrDefault();
                 if (old is null)
                     return false;
-                old = patient;
+                db.Entry(old).CurrentValues.SetValues(patient);
                 db.SaveChanges();
                 return true;
             }

@@ -25,13 +25,9 @@ namespace Diploma.Views
         public EditPatientWindow()
         {
             InitializeComponent();
-            PatientViewModel patientViewModel = new();
+            PatientViewModel patientViewModel = new(this);
         }
-        public EditPatientWindow(Patient a)
-        {
-            InitializeComponent();
-            PatientViewModel patientViewModel = new(this,a);
-        }
+        
         private void CharactersOnly_TextInput(object sender, TextCompositionEventArgs e)
         {
             bool isCyrillic = Regex.IsMatch(e.Text, @"\p{IsCyrillic}");

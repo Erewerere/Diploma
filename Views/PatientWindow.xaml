@@ -81,19 +81,21 @@
 
             <!--<StackPanel  Grid.Row="3" Orientation="Horizontal" Margin="0,4,1,15"/>-->
 
-            <DataGrid 
+            <DataGrid  
                 AutoGenerateColumns="False"  CanUserAddRows="False" 
                 Background="White"
                 Grid.Row="3" 
                 Grid.ColumnSpan="7" 
                 Margin="106,10,106,33" Grid.RowSpan="2" x:Name="PatientGrid" BorderThickness="3" 
-                SelectedItem="{Binding SelectedPatient}"
+                SelectedItem="{Binding Patient}"
                 >
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=Surname,UpdateSourceTrigger=PropertyChanged}" FontSize ="32" Width="1.2*" Header="Прізвище"></DataGridTextColumn>
                     <DataGridTextColumn x:Name="NameColumn"  Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" FontSize ="32" Width="1.2*" Header="Ім'я"></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=Middlename, UpdateSourceTrigger=PropertyChanged}" FontSize ="32" Width="1.2*" Header="По-батькові"></DataGridTextColumn>
-                    <DataGridComboBoxColumn Width="*" Header="ГрупаІнвалідності" ItemsSource="{Binding AllDeceases}"  SelectedItemBinding="{Binding DisabilityGroupId, UpdateSourceTrigger=PropertyChanged}"></DataGridComboBoxColumn>
+                    <DataGridComboBoxColumn Width="*" Header="ГрупаІнвалідності" ItemsSource="{Binding Source= {x:Static vm:PatientViewModel.AllDisabilityGroups}}" DisplayMemberPath="Name" SelectedValuePath="Id"                                             
+                    SelectedItemBinding="{Binding DisabilityGroupId, UpdateSourceTrigger=PropertyChanged}"></DataGridComboBoxColumn>
+                    
                     <DataGridTextColumn Binding="{Binding Path=Age, UpdateSourceTrigger=PropertyChanged}" FontSize ="32" Width="*" Header="Вік"></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=BirthDate, UpdateSourceTrigger=PropertyChanged}"  FontSize ="32" Width="*" Header="Дата Народження"></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=Location, UpdateSourceTrigger=PropertyChanged}" FontSize ="32" Width="*" Header="Місце проживання"></DataGridTextColumn>
