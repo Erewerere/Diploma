@@ -44,6 +44,15 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- row details-->
+    <DataTemplate x:Key="DataGridRowDetailsTemplate1">
+        
+        <TextBlock Margin="10" Text="{Binding FIO}"/>
+    </DataTemplate>
+    
+    
+    
     <Style TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>

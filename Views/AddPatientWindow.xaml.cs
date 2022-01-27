@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -31,6 +32,20 @@ namespace Diploma.Views
         {
             bool isCyrillic = Regex.IsMatch(e.Text, @"\p{IsCyrillic}");
             e.Handled = !isCyrillic;
+        }
+
+        private void Birthdate_CalendarOpened(object sender, RoutedEventArgs e)
+        {
+            var datepicker = sender as DatePicker;
+            if (datepicker != null)
+            {
+                var popup = datepicker.Template.FindName(
+                    "PART_Popup", datepicker) as Popup;
+                if (popup != null && popup.Child is Calendar)
+                {
+                    ((Calendar)popup.Child).DisplayMode = CalendarMode.Decade;
+                }
+            }
         }
     }
    

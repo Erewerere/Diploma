@@ -52,7 +52,24 @@ namespace Diploma.Views
             SetDataGridSource(filtered);
         }
 
-
-       
+        int prevSelectedIndex = -1;
+        
+        private async void DataGrid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {                  
+           
+                await Task.Delay(1); //ensures DataGrid.SelectedIndex is what I just clicked, not the previous value
+                if (PatientGrid.SelectedIndex == prevSelectedIndex)
+                { //check if I'm clicking on what's already selected
+                    PatientGrid.SelectedIndex = -1; //collapses everything
+                prevSelectedIndex = -1;
+                return;
+              
+                }
+                //save current selected index
+                prevSelectedIndex = PatientGrid.SelectedIndex;
+            
+            
+            
+        }
     }
 }

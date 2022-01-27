@@ -73,12 +73,16 @@
                 <TextBox PreviewTextInput="CharactersOnly_TextInput" Name="Surname" Height="20"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,16,0,0" Text="{Binding Path=Surname}"/>
                 <TextBox PreviewTextInput="CharactersOnly_TextInput" Name="Name" Height="21"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,19,0,0" Text="{Binding Path=Name}"/>
                 <TextBox PreviewTextInput="CharactersOnly_TextInput" Name="Middlename"  Height="20"  TextWrapping="Wrap"  BorderThickness="1"  Margin="0,19,0,0" Text="{Binding Path=Middlename}"/>
-                <ComboBox Name="DisabilityGroup"  Margin="0,20,0,0" Background="Transparent" IsEditable="True" />
+                <ComboBox ItemsSource="{Binding Source= {x:Static vm:PatientViewModel.AllDisabilityGroups}}" DisplayMemberPath="Name" SelectedValuePath="Id"                                             
+                SelectedValue="{Binding DisabilityGroupId, UpdateSourceTrigger=PropertyChanged}" Name="DisabilityGroup"  Margin="0,20,0,0" Background="Transparent" IsEditable="True" />
                 <TextBox Name="Location" PreviewTextInput="CharactersOnly_TextInput" Height="20"  TextWrapping="Wrap" Text="" Margin="0,20,0,0" BorderThickness="1" />
-                <TextBox Name="Birthdate" Height="20"  TextWrapping="Wrap" Text="" Margin="0,20,0,0" BorderThickness="1" />
+                <DatePicker SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" CalendarOpened="Birthdate_CalendarOpened"  Name="Birthdate" Height="20" IsDropDownOpen="False" Margin="0,20,0,0" BorderThickness="1" >
+                </DatePicker>
                 <ComboBox Name="Sex" SelectedItem="{Binding Sex, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Source={enum:EnumBinding { x:Type models:Sex } } }"  Margin="0,18,0,0" Background="#D8DADF" IsReadOnly="True" Style="{DynamicResource ComboBoxStyle1}" IsEditable="True"  />
-                <ComboBox Name="Integration" Margin="0,18,0,0" Background="Transparent" IsEditable="True" />
-                <ComboBox  Name ="Decease" Margin="0,16,0,0" Background="Transparent" IsEditable="True"  />
+                <ComboBox ItemsSource="{Binding Source= {x:Static vm:PatientViewModel.AllIntergrations}}" DisplayMemberPath="Name" SelectedValuePath="Id"                                             
+                    SelectedValue="{Binding IntegrationId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Name="Integration" Margin="0,18,0,0" Background="Transparent" IsEditable="True" />
+                <ComboBox ItemsSource="{Binding Source= {x:Static vm:PatientViewModel.AllDeceases}}" DisplayMemberPath="Name" SelectedValuePath="Id"                                             
+                    SelectedValue="{Binding DeceaseId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Name ="Decease" Margin="0,16,0,0" Background="Transparent" IsEditable="True"  />
 
 
             </StackPanel>

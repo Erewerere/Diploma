@@ -28,7 +28,7 @@ namespace Diploma.ViewModels
         
 
         #region Patient Property
-        private static Patient patient = new Patient() { Id=0};
+        private static Patient patient = null;
         public Patient Patient { get => patient; set  { patient = value; OnPropertyChanged(); } }
         public int Id
         {
@@ -86,7 +86,11 @@ namespace Diploma.ViewModels
         }
         public int Age
         {
-            get { return patient.Age; }
+            get { 
+                //if (patient.Age != null)
+                //    return patient.Age;
+                //else
+                    return CalculateAge(BirthDate); }
             set
             {
                 patient.Age = value;
@@ -189,15 +193,7 @@ namespace Diploma.ViewModels
             AllDeceases = DataWorker.GetDeceases();
             AllIntergrations = DataWorker.GetSocialIntergration();
             AllDisabilityGroups  = DataWorker.GetDisabilityGroups();
-            //Id = SelectedPatient.Id;
-            //Name = SelectedPatient.Name;
-            //Surname = SelectedPatient.Surname;
-            //Middlename = SelectedPatient.Middlename;
-            //Location = SelectedPatient.Location;
-            //BirthDate = SelectedPatient.BirthDate;
-            //IntegrationId = SelectedPatient.IntegrationId;
-            //DeceaseId = SelectedPatient.DeceaseId;
-            //Sex = SelectedPatient.Sex;         
+                
                         
         }
 
@@ -208,36 +204,36 @@ namespace Diploma.ViewModels
         public RelayCommand AddPatient => addPatient ?? new RelayCommand(
                     obj =>
                     {
-                        Patient = new Patient() { Name = "CHANGED" };
-                        //RefreshWindow(_addpatientWindow);
-                        //if (patient.Name == null || patient.Name.Trim().Length < 2 )
-                        //{
-                        //    MessageBox.Show("Довжина поля Ім'я повинна буди не меншою ніж 2 букви");
-                        //    SetBlock(_addpatientWindow,"Name");
-                        //    return;
-                        //}
-                        //if (patient.Surname == null || patient.Surname.Trim().Length < 2  )
-                        //{
 
-                        //    SetBlock(_addpatientWindow,"Surname");
-                        //    return;
-                        //}
+                        RefreshWindow(_addpatientWindow);
+                        if (patient.Name == null || patient.Name.Trim().Length < 2)
+                        {
+                            MessageBox.Show("Довжина поля Ім'я повинна буди не меншою ніж 2 букви");
+                            SetBlock(_addpatientWindow, "Name");
+                            return;
+                        }
+                        if (patient.Surname == null || patient.Surname.Trim().Length < 2)
+                        {
 
-                        //if (patient.Middlename == null || patient.Middlename.Trim().Length < 4  )
-                        //{
-                        //    SetBlock(_addpatientWindow,"Middlename");
-                        //    return;
-                        //}
+                            SetBlock(_addpatientWindow, "Surname");
+                            return;
+                        }
 
-                        //if (DataWorker.CreatePatient(patient))
-                        //{
-                        //    MessageBox.Show("Додано");
-                        //    _addpatientWindow.DialogResult = true;
-                        //    RefreshVM();
-                            
-                        //    return;
-                        //}
-                        //MessageBox.Show("Такий користувач вже є");
+                        if (patient.Middlename == null || patient.Middlename.Trim().Length < 4)
+                        {
+                            SetBlock(_addpatientWindow, "Middlename");
+                            return;
+                        }
+
+                        if (DataWorker.CreatePatient(patient))
+                        {
+                            MessageBox.Show("Додано");
+                            _addpatientWindow.DialogResult = true;
+                            RefreshVM();
+
+                            return;
+                        }
+                        MessageBox.Show("Такий користувач вже є");
                     }
                     );
 
@@ -304,6 +300,16 @@ namespace Diploma.ViewModels
 
         }
 
+        private static int CalculateAge(DateTime dateOfBirth)
+        {
+            int age = 0;
+            age = DateTime.Now.Year - dateOfBirth.Year;
+            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear)
+                age = age - 1;
+            if (dateOfBirth > DateTime.Now.AddYears(-age))
+                age--;
+            return age;
+        }
         #endregion
 
         #region Commands for Interaction With Windows
@@ -312,6 +318,7 @@ namespace Diploma.ViewModels
         public RelayCommand OpenAddPatientWindow => openAddPatientWindow ?? new RelayCommand(
                     obj =>
                     {
+                        patient = new() { BirthDate = new(2001,01,01) };
                         AddPatientWindow window = new AddPatientWindow();
                         bool d =Program.OpenAndCenterWindow(window);
                         if(d == true)
@@ -347,6 +354,7 @@ namespace Diploma.ViewModels
                     obj =>
                     {
                         _addpatientWindow.Close();
+                        patient = null;
                     }
                     );
 
