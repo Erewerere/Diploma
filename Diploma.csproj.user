@@ -10,9 +10,6 @@
     <Compile Update="Views\EditPatientWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Main.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\PatientWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -24,7 +21,7 @@
     <Page Update="Views\EditPatientWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Main.xaml">
+    <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PatientWindow.xaml">

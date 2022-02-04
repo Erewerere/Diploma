@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\GitHub\Diploma2\Diploma\App.xaml
-111543177603
+112146246981
 
-31-1655737573
-218-1087464720
-Styles\Dictionary1.xaml;Views\AddPatientWindow.xaml;Views\AppointServiceWindow.xaml;Views\CreateReportWindow.xaml;Views\EditPatientWindow.xaml;Views\EnterWindow.xaml;Views\Main.xaml;Views\PatientWindow.xaml;Views\RegistrationWindow.xaml;Views\ServiceWindow.xaml;Views\Window1.xaml;
+31973088075
+228364596376
+Styles\Dictionary1.xaml;Views\AddPatientWindow.xaml;Views\AppointServiceWindow.xaml;Views\CreateReportWindow.xaml;Views\EditPatientWindow.xaml;Views\EnterWindow.xaml;Views\MainWindow.xaml;Views\PatientWindow.xaml;Views\RegistrationWindow.xaml;Views\ServiceWindow.xaml;Views\Window1.xaml;
 
 False
 

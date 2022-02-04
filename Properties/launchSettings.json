@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Diploma": {
+      "commandName": "Executable",
+      "executablePath": "C:\\GitHub\\Diploma2\\Diploma\\bin\\Debug\\net5.0-windows\\Diploma.exe",
+      "workingDirectory": "C:\\GitHub\\Diploma2\\Diploma\\bin\\Debug"
+    }
+  }
+}
