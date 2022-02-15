@@ -40,5 +40,5 @@ namespace Diploma.Models
             throw new NotImplementedException();
         }
     }
-    public enum Sex { Чоловіча =1 , Жіноча =0 }
+    public enum Sex { Чоловіча =0 , Жіноча =1 }
 }

@@ -17,9 +17,9 @@ namespace Diploma.Views
     /// <summary>
     /// Логика взаимодействия для ServiceAppointWindow.xaml
     /// </summary>
-    public partial class AppointServiceWindow : Window
+    public partial class EditProvidedServiceWindow : Window
     {
-        public AppointServiceWindow()
+        public EditProvidedServiceWindow()
         {
             InitializeComponent();
         }

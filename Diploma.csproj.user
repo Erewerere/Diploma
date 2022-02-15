@@ -7,30 +7,39 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\EditPatientWindow.xaml.cs">
+    <Compile Update="Views\ProvidedService\AddProvidedServiceWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\PatientWindow.xaml.cs">
+    <Compile Update="Views\Patient\EditPatientWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Window1.xaml.cs">
+    <Compile Update="Views\Patient\PatientWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\TestWindow\Window1.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\EditPatientWindow.xaml">
+    <Page Update="Views\ProvidedService\AddProvidedServiceWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ProvidedService\EditProvidedServiceWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Patient\EditPatientWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\PatientWindow.xaml">
+    <Page Update="Views\Patient\PatientWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ServiceWindow.xaml">
+    <Page Update="Views\Service\ServiceWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Window1.xaml">
+    <Page Update="Views\TestWindow\Window1.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

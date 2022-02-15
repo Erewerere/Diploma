@@ -19,15 +19,15 @@
                 Margin="158,28,106,33" x:Name="Grid" BorderThickness="3"   SelectedItem="{Binding SelectedService}"
                 >
             <DataGrid.Columns >
-                <DataGridTextColumn x:Name="NameColumn" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" FontSize ="32" Width="1.2*" Header="Прізвище"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=ReabilitationType.Name, Mode=OneWay}"  FontSize ="32" Width="1.2*" Header="Ім'я"></DataGridTextColumn>
+                <DataGridTextColumn x:Name="NameColumn" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" FontSize ="32" Width="1.2*" Header="Назва послуги"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=ReabilitationType.Name, Mode=OneWay}"  FontSize ="32" Width="1.2*" Header="Тип реабілітації"></DataGridTextColumn>
 
 
 
             </DataGrid.Columns>
         </DataGrid>
         <TextBox Text="{Binding Name}" x:Name="Label1"  HorizontalAlignment="Left" Margin="10,188,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="30,249,0,0" VerticalAlignment="Top" Command="{Binding Click}"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="30,249,0,0" VerticalAlignment="Top" Command="{Binding Click}" />
 
     </Grid>
 </Window>

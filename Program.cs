@@ -22,5 +22,18 @@ namespace Diploma
             }
             return false;
         }
+
+        //List<TextBox> AllTextBoxes(DependencyObject parent)
+        //{
+        //    var list = new List<TextBox>();
+        //    for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+        //    {
+        //        var child = VisualTreeHelper.GetChild(parent, i);
+        //        if (child is TextBox)
+        //            list.Add(child as TextBox);
+        //        list.AddRange(AllTextBoxes(child));
+        //    }
+        //    return list;
+        //}
     }
 }

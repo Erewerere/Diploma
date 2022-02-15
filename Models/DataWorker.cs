@@ -24,10 +24,7 @@ namespace Diploma.Models
                     && db.Patients.Any(p => p.BirthDate == patient.BirthDate))
                     return false;
 
-                patient.DeceaseId = 1;
-                patient.IntegrationId = 1;
-                patient.DisabilityGroupId = 1;
-
+              
                 db.Patients.Add(patient);
                 db.SaveChanges();
 
@@ -50,7 +47,7 @@ namespace Diploma.Models
         {
             using (DiplomaContext db = new())
             {
-                Patient old = db.Patients.Where(p => p.Id == patient.Id).FirstOrDefault();
+                Patient old = db.Patients.Where(p => p.Id == patient.Id).First();
                 if (old is null)
                     return false;
                 db.Entry(old).CurrentValues.SetValues(patient);
@@ -89,12 +86,25 @@ namespace Diploma.Models
                 return true;
             }
         }
-
-        public static Task<List<Service>> GetServices()
+        public static bool UpdateServices(Service service)
         {
             using (DiplomaContext db = new())
             {
-                return db.Services.ToListAsync();
+                db.ReabilitationTypes.LoadAsync();
+                if (db.Services.Any(p => p.Id == service.Id))
+                    return false;
+
+                db.Services.AddAsync(service);
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+        public static List<Service> GetServices()
+        {
+            using (DiplomaContext db = new())
+            {
+                return db.Services.ToList();
             }
         }
 
@@ -105,6 +115,61 @@ namespace Diploma.Models
                 if (!db.Services.Any(p => p.Id == service.Id))
                     return false;
                 db.Services.Remove(service);
+                db.SaveChanges();
+                return true;
+            }
+        }
+        #endregion
+
+        #region ProvidedService
+       
+        public static bool CreateProvidedService(ProvidedService patient)
+        {
+            using (DiplomaContext db = new())
+            {
+                patient.Id = 0;
+                //if (db.ProvidedServices.Any(p => p.Pati == patient.Name) && db.ProvidedServices.Any(p => p.Surname == patient.Surname) && db.ProvidedServices.Any(p => p.Middlename == patient.Middlename)
+                //    && db.ProvidedServices.Any(p => p.BirthDate == patient.BirthDate))
+                //    return false;
+
+               
+                db.ProvidedServices.Add(patient);
+                db.SaveChanges();
+
+                return true;
+            }
+        }
+        
+        public static List<ProvidedService> GetProvidedServices()
+        {
+            using (DiplomaContext db = new())
+            {
+                db.ProvidedServices.Load();
+                return db.ProvidedServices.ToList();
+            }
+        }
+
+                public static bool UpdateProvidedService(ProvidedService providedService)
+        {
+            using (DiplomaContext db = new())
+            {
+                              
+                if (db.ProvidedServices.Any(s=>s.Id == providedService.Id))
+                   return false;
+                //db.Entry(old).CurrentValues.SetValues(providedService);
+                //db.SaveChanges();
+                db.ProvidedServices.Update(providedService);
+                return true;
+            }
+        }
+
+        public static bool DeleteProvidedService(ProvidedService providedService)
+        {
+            using (DiplomaContext db = new())
+            {
+                if (!db.ProvidedServices.Any(p => p.Id == providedService.Id))
+                    return false;
+                db.ProvidedServices.Remove(providedService);
                 db.SaveChanges();
                 return true;
             }

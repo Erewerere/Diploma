@@ -175,10 +175,11 @@ namespace Diploma.ViewModels
         public PatientViewModel(PatientWindow window)
         {
             _patientWindow = window;
-
-            IEnumerable<Patient> data = DataWorker.GetPatients();
-           
+            IEnumerable<Patient> data = DataWorker.GetPatients();           
             window.SetDataGridSource(data);
+            AllDeceases = DataWorker.GetDeceases();
+            AllIntergrations = DataWorker.GetSocialIntergration();
+            AllDisabilityGroups = DataWorker.GetDisabilityGroups();
         }
         public PatientViewModel(AddPatientWindow window)
         {
@@ -190,16 +191,14 @@ namespace Diploma.ViewModels
         public PatientViewModel(EditPatientWindow window)
         {
             _editpatientWindow = window;
-            AllDeceases = DataWorker.GetDeceases();
-            AllIntergrations = DataWorker.GetSocialIntergration();
-            AllDisabilityGroups  = DataWorker.GetDisabilityGroups();
+           
                 
                         
         }
 
 
 
-
+        #region Patient Model Manipulation
         private RelayCommand addPatient;
         public RelayCommand AddPatient => addPatient ?? new RelayCommand(
                     obj =>
@@ -246,9 +245,25 @@ namespace Diploma.ViewModels
                 {
                     MessageBox.Show("There is no update");
                 }
+                _editpatientWindow.DialogResult = true;
             }
         );
 
+        private RelayCommand deletePatient;
+        public RelayCommand DeletePatient =>deletePatient ?? new RelayCommand(
+            obj =>
+            {
+                var d = DataWorker.DeletePatient(patient);
+                if (d == false)
+                {
+                    MessageBox.Show("Помилка");
+                    return;
+                }
+                _patientWindow.SetDataGridSource(DataWorker.GetPatients());
+            }
+        );
+
+        #endregion
 
 
         #region Methods
@@ -266,18 +281,7 @@ namespace Diploma.ViewModels
             patient = new Patient() { Id = 0 };
         }
 
-        List<TextBox> AllTextBoxes(DependencyObject parent)
-        {
-            var list = new List<TextBox>();
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
-            {
-                var child = VisualTreeHelper.GetChild(parent, i);
-                if (child is TextBox)
-                    list.Add(child as TextBox);
-                list.AddRange(AllTextBoxes(child));
-            }
-            return list;
-        }
+        
 
         public Control GetElement(Window window,string name)
         {
@@ -314,11 +318,12 @@ namespace Diploma.ViewModels
 
         #region Commands for Interaction With Windows
 
+        
         private RelayCommand openAddPatientWindow;
         public RelayCommand OpenAddPatientWindow => openAddPatientWindow ?? new RelayCommand(
                     obj =>
                     {
-                        patient = new() { BirthDate = new(2001,01,01) };
+                        patient = new() { BirthDate = new(2000,01,01) };
                         AddPatientWindow window = new AddPatientWindow();
                         bool d =Program.OpenAndCenterWindow(window);
                         if(d == true)

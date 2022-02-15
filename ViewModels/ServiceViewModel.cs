@@ -15,7 +15,7 @@ namespace Diploma.ViewModels
     public class ServiceViewModel : INotifyPropertyChanged
     {
         private static ServiceWindow _window;
-        public Service Service = new Service() { Name="A"};
+        public Service Service = new Service() { Id=0};
         private List<Service> services;
         public List<Service> Services
         {
@@ -28,10 +28,8 @@ namespace Diploma.ViewModels
                 OnPropertyChanged();
             }
         }
-        private Service service = new Service() { Name = "" };
-        public Service SelectedService { get => service; set { service = value; OnPropertyChanged(); }  }
-
-        public string Name { get => SelectedService.Name ?? ""; set { SelectedService.Name = value; OnPropertyChanged(); } }
+        private Service service = new Service() { Name = "" };       
+        public string Name { get => service.Name ?? ""; set { service.Name = value; OnPropertyChanged(); } }
 
         public ServiceViewModel(ServiceWindow window)
         { _window = window;
@@ -49,7 +47,7 @@ namespace Diploma.ViewModels
         public RelayCommand AddPatient => editService ?? new RelayCommand(
                     obj =>
                     {
-                        _window.setLabel(SelectedService.Name);
+                        _window.setLabel(service.Name);
                     }
                     );
 
@@ -64,7 +62,6 @@ namespace Diploma.ViewModels
 
         private RelayCommand click;
         //private Workbook xlWorkBook;
-
         public RelayCommand Click => click ??= new RelayCommand(obj => {
 
             //var service = new Service { Name = "a" };
@@ -81,7 +78,7 @@ namespace Diploma.ViewModels
             //xlWorkSheet.Cells[3, 1] = "2";
             //xlWorkSheet.Cells[3, 2] = "Two";
             //xlWorkBook.SaveAs("your-file-name.xls");
-            _window.setLabel(SelectedService.Name);
+            
         });
 
         

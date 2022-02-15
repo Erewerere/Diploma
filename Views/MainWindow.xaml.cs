@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Diploma.Models;
 using Diploma.ViewModels;
+using Diploma.Views;
 
 namespace Diploma
 {
@@ -47,14 +48,23 @@ namespace Diploma
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void PatientMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            PatientWindow p = new();
+            Program.OpenAndCenterWindow(p);
 
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void ServiceMenuItem_Click(object sender, RoutedEventArgs e)
         {
+            ServiceWindow p = new();
+            Program.OpenAndCenterWindow(p);
+        }
 
+        private void AppointServiceMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ProvidedServiceWindow p = new();
+            Program.OpenAndCenterWindow(p);
         }
     }
 }

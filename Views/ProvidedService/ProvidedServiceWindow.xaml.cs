@@ -1,5 +1,4 @@
-﻿using Diploma.EF;
-using Diploma.Models;
+﻿using Diploma.Models;
 using Diploma.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,21 +17,14 @@ using System.Windows.Shapes;
 namespace Diploma.Views
 {
     /// <summary>
-    /// Логика взаимодействия для PatientWindow.xaml
+    /// Логика взаимодействия для ServiceAppointWindow.xaml
     /// </summary>
-    public partial class PatientWindow : Window
+    public partial class ProvidedServiceWindow : Window
     {
-        private PatientViewModel patientView;
-        public PatientWindow()
+        public ProvidedServiceWindow()
         {
             InitializeComponent();
-            
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            PatientViewModel patientView = new(this);            
-        }
-
 
         public void SetDataGridSource(IEnumerable<Patient> patients)
         {
@@ -40,11 +32,11 @@ namespace Diploma.Views
         }
 
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (SearchName.Text.Length < 1)
             {
-                var patientData = DataWorker.GetPatients();              
+                var patientData = DataWorker.GetPatients();
                 SetDataGridSource(patientData);
             }
 
@@ -53,23 +45,28 @@ namespace Diploma.Views
         }
 
         int prevSelectedIndex = -1;
-        
+
         private async void DataGrid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {                  
-           
-                await Task.Delay(1); //ensures DataGrid.SelectedIndex is what I just clicked, not the previous value
-                if (PatientGrid.SelectedIndex == prevSelectedIndex)
-                { //check if I'm clicking on what's already selected
-                    PatientGrid.SelectedIndex = -1; //collapses everything
+        {
+
+            await Task.Delay(1); //ensures DataGrid.SelectedIndex is what I just clicked, not the previous value
+            if (PatientGrid.SelectedIndex == prevSelectedIndex)
+            { //check if I'm clicking on what's already selected
+                PatientGrid.SelectedIndex = -1; //collapses everything
                 prevSelectedIndex = -1;
                 return;
-              
-                }
-                //save current selected index
-                prevSelectedIndex = PatientGrid.SelectedIndex;
-            
-            
-            
+
+            }
+            //save current selected index
+            prevSelectedIndex = PatientGrid.SelectedIndex;
+
+
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ProvidedServiceViewModel viewModel = new(this);
         }
     }
 }

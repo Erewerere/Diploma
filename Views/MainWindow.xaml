@@ -58,15 +58,15 @@
             <StackPanel  Background ="#63A4DA" Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" />
 
             <Menu  Background ="Transparent"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="6" >
-                <MenuItem  Background ="Transparent" MinWidth="100"  FontSize="22" Width="116" Click="Button_Click_1" Height="54"  >
+                <MenuItem  Background ="Transparent" MinWidth="100"  FontSize="22" Width="116"  Height="54"  >
                     <MenuItem.Header >
                         <TextBlock Text="Дані"  TextAlignment="Center" Width="110" Height="30" />
                     </MenuItem.Header>
-                    <MenuItem Header="Пацієнти">                        
+                    <MenuItem Header="Пацієнти" Click="PatientMenuItem_Click">                        
                     </MenuItem>
-                    <MenuItem Header="Перелік послуг">
+                    <MenuItem Header="Перелік послуг" Click="ServiceMenuItem_Click">
                     </MenuItem>
-                    <MenuItem Header="Оформлення послуги">
+                    <MenuItem Header="Оформлення послуги" Click="AppointServiceMenuItem_Click">
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Background ="Transparent" MinWidth="100" Click="Button_Click" Header="Акаунт" FontSize="22" Width="110"/>
@@ -127,7 +127,7 @@
                     <TextBox Margin="0,9,0,0" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3"/>
                     <Label Content="Дані про акаунт" HorizontalAlignment="Left" VerticalAlignment="Top" Width="198" FontSize="20" Height="48" Margin="0,1,0,0" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="2" />
                     <Button Visibility="Hidden" Content="Зберегти" VerticalAlignment="Top"  Height="31"  Style="{DynamicResource NormalButton}" Grid.Row="7" Grid.Column="3" />
-                    <Button Visibility="Hidden"  Content="Змінити" VerticalAlignment="Top" Click="Button_Click_2" FontSize="16" Height="31" Style="{DynamicResource NormalButton}" Grid.ColumnSpan="2" Grid.Row="7" />
+                    <Button Visibility="Hidden"  Content="Змінити" VerticalAlignment="Top"  FontSize="16" Height="31" Style="{DynamicResource NormalButton}" Grid.ColumnSpan="2" Grid.Row="7" />
 
 
                 </Grid>
