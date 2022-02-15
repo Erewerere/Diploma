@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,18 +20,27 @@ namespace Diploma.EF
         public DbSet<ProvidedService> ProvidedServices { get; set; }
         public DbSet<ReabilitationCourse> ReabilitationCourses { get; set; }
         public DbSet<User> Users { get; set; }
-       
+        public DbSet<Theme> Themes { get; set; }
+
 
         public DiplomaContext()
         {
+            var d = ConfigurationManager.AppSettings.Get("connection_database");
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(
-                "server=localhost;user=root;password=Password12;database=diploma;",
+
+            // AppSettings are in App.config
+            string  adress= ConfigurationManager.AppSettings.Get("connection_adress");
+            string  user= ConfigurationManager.AppSettings.Get("connection_user");
+            string  password= ConfigurationManager.AppSettings.Get("connection_password");
+            string database = ConfigurationManager.AppSettings.Get("connection_database");
+            optionsBuilder.UseMySql($"server={adress};user={user};password={password};database={database};",
                 new MySqlServerVersion(new Version(8, 0, 11))
+                 
             );
+            
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -6078,19 +6078,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pavel\\.nuget\\packages\\": {}
+    "C:\\Users\\PC7\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitHub\\Diploma2\\Diploma\\Diploma.csproj",
+      "projectUniqueName": "F:\\Pavel\\Diploma\\Diploma.csproj",
       "projectName": "Diploma",
-      "projectPath": "C:\\GitHub\\Diploma2\\Diploma\\Diploma.csproj",
-      "packagesPath": "C:\\Users\\Pavel\\.nuget\\packages\\",
-      "outputPath": "C:\\GitHub\\Diploma2\\Diploma\\obj\\",
+      "projectPath": "F:\\Pavel\\Diploma\\Diploma.csproj",
+      "packagesPath": "C:\\Users\\PC7\\.nuget\\packages\\",
+      "outputPath": "F:\\Pavel\\Diploma\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Pavel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC7\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6151,7 +6158,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

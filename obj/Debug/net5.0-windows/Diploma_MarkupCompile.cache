@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\GitHub\Diploma2\Diploma\obj\Debug\net5.0-windows\
+F:\Pavel\Diploma\obj\Debug\net5.0-windows\
 Diploma
 none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
-C:\GitHub\Diploma2\Diploma\App.xaml
+F:\Pavel\Diploma\App.xaml
 13-724344466
 
-34-1963920560
-228364596376
+352075940821
+2281667514362
 Styles\Dictionary1.xaml;Views\CreateReportWindow.xaml;Views\EnterWindow.xaml;Views\MainWindow.xaml;Views\Patient\AddPatientWindow.xaml;Views\Patient\EditPatientWindow.xaml;Views\Patient\PatientWindow.xaml;Views\ProvidedService\AddProvidedServiceWindow.xaml;Views\ProvidedService\EditProvidedServiceWindow.xaml;Views\ProvidedService\ProvidedServiceWindow.xaml;Views\RegistrationWindow.xaml;Views\Service\ServiceWindow.xaml;Views\TestWindow\Window1.xaml;
 
 False
