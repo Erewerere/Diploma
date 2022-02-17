@@ -175,3 +175,4 @@ F:\Pavel\Diploma\obj\Debug\net5.0-windows\ref\Diploma.dll
 F:\Pavel\Diploma\obj\Debug\net5.0-windows\Diploma.pdb
 F:\Pavel\Diploma\obj\Debug\net5.0-windows\Diploma.genruntimeconfig.cache
 F:\Pavel\Diploma\bin\Debug\net5.0-windows\Diploma.dll.config
+C:\GitHub\Diploma2\Diploma\bin\Debug\net5.0-windows\Diploma.dll.config

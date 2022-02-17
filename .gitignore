@@ -2,3 +2,5 @@
 .vs/Diploma/v16/.suo
 obj/project.assets.json
 obj/project.nuget.cache
+*.config
+Properties/launchSettings.json

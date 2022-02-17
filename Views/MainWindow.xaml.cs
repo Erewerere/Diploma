@@ -80,7 +80,7 @@ namespace Diploma
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             //ConfigurationManager.AppSettings.Set("connection_database", "kursach") ;
-            UpdateAppConfig("connection_database", "kursach");
+            UpdateAppConfig("connection_database", "Diploma");
         }
         private static void UpdateAppConfig(string newKey, string newValue)
         {
